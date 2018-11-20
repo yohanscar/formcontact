@@ -1,0 +1,28 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "formcontact",
+                "projectName": "formcontact",
+                "workingDirectory": "/home/neo/Documents/workspace-sts-3.9.4.RELEASE/formcontact",
+                "args": [],
+                "vmargs": [],
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "formcontact",
+                "projectName": "formcontact",
+                "workingDirectory": "/home/neo/Documents/workspace-sts-3.9.4.RELEASE/formcontact",
+                "args": [],
+                "vmargs": [],
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
