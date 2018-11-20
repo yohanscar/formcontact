@@ -15,7 +15,7 @@ import com.formcontact.service.ContatoService;
 
 	@RestController
 
-    public class FormController {
+    public class ContatoController {
 	   
 	    @Autowired
 		ContatoService ContatoService;
@@ -24,7 +24,7 @@ import com.formcontact.service.ContatoService;
 	    @RequestMapping(method=RequestMethod.POST, value="/contato", consumes=MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<ContatoModel> cadastrarContato(@RequestBody ContatoModel contato){
 
-			ContatoModel contatoCadastrado = ContatoService.cadastrar(form);
+			ContatoModel contatoCadastrado = ContatoService.cadastrar(contato);
 		
 	        return new ResponseEntity<ContatoModel>(contatoCadastrado, HttpStatus.CREATED);
 	    }

@@ -1,7 +1,6 @@
 package com.formcontact.service;
 
 import com.formcontact.util.*;
-import com.formcontact.util.PasswordStorage.CannotPerformOperationException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.formcontact.model.ContatoModel;
-import com.formcontact.model.Imagemform;
 
 @Service
 public class ContatoService {
@@ -44,7 +42,7 @@ public class ContatoService {
     	return contato;
     }
    
-    public List<form> buscarTodos(){
+    public List<ContatoModel> buscarTodos(){
     	List<ContatoModel> ListaRetorno = new ArrayList<ContatoModel>();
     	String sql = "SELECT * FROM contato order by id_contato desc ";
     	
@@ -56,7 +54,7 @@ public class ContatoService {
 	        ContatoModel x = null;
     	    while(rs1.next()){
     	    	x = new ContatoModel();
-    	        x.id_contato = rs1.getInt("id_contato");
+    	        x.idContato = rs1.getInt("id_contato");
     	    	x.moeda = rs1.getString("moeda");
     	    	x.tipo = rs1.getString("tipo");
     	    	x.valor = rs1.getInt("valor");
