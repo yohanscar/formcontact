@@ -15,4 +15,4 @@ CREATE TABLE "formcontact"."public"."contato" (
                 CONSTRAINT "id_contato" PRIMARY KEY ("id_contato")
 );
 
-ALTER SEQUENCE "formcontact"."public"."contato_id_seq" OWNED BY "formcontact"."public"."usuario"."id_contato";
+ALTER SEQUENCE "formcontact"."public"."contato_id_seq" OWNED BY "formcontact"."public"."contato"."id_contato";

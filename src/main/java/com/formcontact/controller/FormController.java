@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.formcontact.model.form;
-import com.formcontact.service.formService;
+import com.formcontact.model.ContatoModel;
+import com.formcontact.service.ContatoService;
 
 	@RestController
 
     public class FormController {
 	   
 	    @Autowired
-		FormService formService;
+		ContatoService ContatoService;
 
 		//RouteSeq: 15
 	    @RequestMapping(method=RequestMethod.POST, value="/contato", consumes=MediaType.APPLICATION_JSON_VALUE)
-	    public ResponseEntity<form> cadastrarContato(@RequestBody ContatoModel contato){
+	    public ResponseEntity<ContatoModel> cadastrarContato(@RequestBody ContatoModel contato){
 
-			ContatoModel contatoCadastrado = formService.cadastrar(form);
+			ContatoModel contatoCadastrado = ContatoService.cadastrar(form);
 		
-	        return new ResponseEntity<form>(contatoCadastrado, HttpStatus.CREATED);
+	        return new ResponseEntity<ContatoModel>(contatoCadastrado, HttpStatus.CREATED);
 	    }
 	   
 		//RouteSeq: 16
@@ -38,13 +38,13 @@ import com.formcontact.service.formService;
 		
 		//RouteSeq: 18
 	    @RequestMapping(method=RequestMethod.DELETE, value="/contato/{id}")
-	    public ResponseEntity<form> excluirContato(@PathVariable Integer id){
+	    public ResponseEntity<ContatoModel> excluirContato(@PathVariable Integer id){
 	        ContatoModel contatoEncontrado = ContatoService.buscarPorId(id);
 	        if(contatoEncontrado==null){
 	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	        }
 	        ContatoService.excluir(contatoEncontrado);
-	        return new ResponseEntity<form>(HttpStatus.OK);
+	        return new ResponseEntity<ContatoModel>(HttpStatus.OK);
 		}
 		
 	}

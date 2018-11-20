@@ -53,7 +53,7 @@ public class ContatoService {
     	    
     	    ResultSet rs1 = preparedStatement.executeQuery();
 
-	        form x = null;
+	        ContatoModel x = null;
     	    while(rs1.next()){
     	    	x = new ContatoModel();
     	        x.id_contato = rs1.getInt("id_contato");
@@ -91,7 +91,7 @@ public class ContatoService {
     }
 
     public ContatoModel buscarPorId(Integer idform) {
-    	ContatoModel encontrada = new form();
+    	ContatoModel encontrada = new ContatoModel();
     	String sql = "SELECT * FROM contato WHERE id_contato = ?";
     	try{
     	    System.out.println("buscar form por id >> "+idform);
@@ -103,7 +103,7 @@ public class ContatoService {
 	        ContatoModel x = null;
     	    while(rs1.next()){
     	    	x = new ContatoModel();
-    	        x.id_contato = rs1.getInt("id_contato");
+    	        x.idContato = rs1.getInt("id_contato");
     	    	x.moeda = rs1.getString("moeda");
     	    	x.tipo = rs1.getString("tipo");
     	    	x.valor = rs1.getInt("valor");
