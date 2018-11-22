@@ -11,6 +11,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,11 +23,12 @@ import com.formcontact.model.ContatoModel;
     public class ProfitfyController {
 	   
 		//RouteSeq: 15
-	    @RequestMapping(method=RequestMethod.GET, value="/profitfyBRLtoDCR")
-	    public ResponseEntity<String> cadastrarContato(){
+	    @RequestMapping(method=RequestMethod.GET, value="/profitfy/{x}")
+	    public ResponseEntity<String> cadastrarContato(@PathVariable String x){
 			String responseString = "";
 		
-			String getUrl = "https://profitfy.trade/api/v1/public/orderbook/BRL/DCR";
+			//String getUrl = "https://profitfy.trade/api/v1/public/orderbook/BRL/DCR";
+			String getUrl = x;
 
 			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
