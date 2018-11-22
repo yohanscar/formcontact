@@ -26,9 +26,9 @@ import com.formcontact.model.ContatoModel;
 	    @RequestMapping(method=RequestMethod.GET, value="/profitfy/{x}")
 	    public ResponseEntity<String> cadastrarContato(@PathVariable String x){
 			String responseString = "";
-		
-			//String getUrl = "https://profitfy.trade/api/v1/public/orderbook/BRL/DCR";
-			String getUrl = x;
+		    //https://profitfy.trade/api/v1/public/orderbook/BRL/DCR
+			String url = "https://profitfy.trade/api/v1/public/orderbook/";
+			String getUrl = url + x;
 
 			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
