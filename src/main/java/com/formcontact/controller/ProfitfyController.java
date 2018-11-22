@@ -22,7 +22,7 @@ import com.formcontact.model.ContatoModel;
     public class ProfitfyController {
 	   
 		//RouteSeq: 15
-	    @RequestMapping(method=RequestMethod.GET, value="/profitfyBRLtoDCR", consumes=MediaType.APPLICATION_JSON_VALUE)
+	    @RequestMapping(method=RequestMethod.GET, value="/profitfyBRLtoDCR")
 	    public ResponseEntity<String> cadastrarContato(@RequestBody ContatoModel contato){
 			String responseString = "";
 		
