@@ -23,7 +23,7 @@ import com.formcontact.model.ContatoModel;
 	   
 		//RouteSeq: 15
 	    @RequestMapping(method=RequestMethod.GET, value="/profitfyBRLtoDCR")
-	    public ResponseEntity<String> cadastrarContato(@RequestBody ContatoModel contato){
+	    public ResponseEntity<String> cadastrarContato(){
 			String responseString = "";
 		
 			String getUrl = "https://profitfy.trade/api/v1/public/orderbook/BRL/DCR";
