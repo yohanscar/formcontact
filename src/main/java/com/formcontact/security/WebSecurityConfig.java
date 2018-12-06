@@ -21,7 +21,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/*").permitAll()  
 			.antMatchers(HttpMethod.GET, "/").permitAll()
 			.antMatchers(HttpMethod.OPTIONS,"/").permitAll()  
-			.antMatchers("/info").permitAll()
 			.antMatchers(HttpMethod.POST, "/contato").permitAll()	
 			.antMatchers(HttpMethod.GET, "/contatos").permitAll()		
 			.antMatchers(HttpMethod.GET, "/profitfyBrltoDcr/").permitAll()	
@@ -31,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/profitfyBtctoDcr/").permitAll()	
 			.antMatchers(HttpMethod.GET, "/profitfyLtctoDcr/").permitAll()			
 			.antMatchers(HttpMethod.DELETE, "/contato/").permitAll()
+
+			.antMatchers(HttpMethod.POST, "/doacao").permitAll()	
+			.antMatchers(HttpMethod.GET, "/doacao").permitAll()		
 
 			.anyRequest().authenticated()
 			.and()
