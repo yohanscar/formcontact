@@ -22,7 +22,7 @@ public class DoacaoService {
      
     public DoacaoModel cadastrar(DoacaoModel Doacao){
 
- 	    String sql = "INSERT INTO doacao ( nome , cpf , email, valorDoacao, total_bitcoins, origem, destino, api_response, data_inclusao) VALUES ( ? , ? , ? ,? , ? , ? ,? , ? , ? )";
+ 	    String sql = "INSERT INTO doacao ( nome , cpf , email, valor_doacao, total_bitcoins, origem, destino, api_response, data_inclusao) VALUES ( ? , ? , ? ,? , ? , ? ,? , ? , ? )";
 		
     	try{  	    		    
     	    PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -56,16 +56,16 @@ public class DoacaoService {
 	        DoacaoModel x = null;
     	    while(rs1.next()){
     	    	x = new DoacaoModel();
-    	        x.idDoacao = rs1.getInt("id_Doacao");
-    	    	x.nome = rs1.getString("moeda");
-    	    	x.cpf = rs1.getString("tipo");
-    	    	x.email = rs1.getString("valor");
-    	    	x.valorDoacao = rs1.getFloat("nome");
-    	    	x.totalBitcoins = rs1.getFloat("email");
-				x.origem = rs1.getString("telefone");
-				x.destino = rs1.getString("telefone");
-				x.apiResponse = rs1.getString("telefone");
-				x.dataInclusao = rs1.getTimestamp("telefone");
+    	        x.idDoacao = rs1.getInt("id_doacao");
+    	    	x.nome = rs1.getString("nome");
+    	    	x.cpf = rs1.getString("cpf");
+    	    	x.email = rs1.getString("email");
+    	    	x.valorDoacao = rs1.getFloat("valor_doacao");
+    	    	x.totalBitcoins = rs1.getFloat("total_bitcoins");
+				x.origem = rs1.getString("origem");
+				x.destino = rs1.getString("destino");
+				x.apiResponse = rs1.getString("api_response");
+				x.dataInclusao = rs1.getTimestamp("data_inclusao");
     	    	    	    	
     	        System.out.println(x.toString());    	        
     	        
@@ -106,16 +106,16 @@ public class DoacaoService {
 	        DoacaoModel x = null;
     	    while(rs1.next()){
     	    	x = new DoacaoModel();
-    	        x.idDoacao = rs1.getInt("id_Doacao");
-    	    	x.nome = rs1.getString("moeda");
-    	    	x.cpf = rs1.getString("tipo");
-    	    	x.email = rs1.getString("valor");
-    	    	x.valorDoacao = rs1.getFloat("nome");
-    	    	x.totalBitcoins = rs1.getFloat("email");
-				x.origem = rs1.getString("telefone");
-				x.destino = rs1.getString("telefone");
-				x.apiResponse = rs1.getString("telefone");
-				x.dataInclusao = rs1.getTimestamp("telefone");
+    	        x.idDoacao = rs1.getInt("id_doacao");
+    	    	x.nome = rs1.getString("nome");
+    	    	x.cpf = rs1.getString("cpf");
+    	    	x.email = rs1.getString("email");
+    	    	x.valorDoacao = rs1.getFloat("valor_doacao");
+    	    	x.totalBitcoins = rs1.getFloat("total_bitcoins");
+				x.origem = rs1.getString("origem");
+				x.destino = rs1.getString("destino");
+				x.apiResponse = rs1.getString("api_response");
+				x.dataInclusao = rs1.getTimestamp("data_inclusao");
     	    	    	    	
     	        System.out.println(x.toString());    
     	        
