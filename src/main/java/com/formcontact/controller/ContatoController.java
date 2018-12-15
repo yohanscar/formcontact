@@ -20,7 +20,7 @@ import com.formcontact.service.ContatoService;
 	    @Autowired
 		ContatoService ContatoService;
 
-		//RouteSeq: 15
+		
 	    @RequestMapping(method=RequestMethod.POST, value="/contato", consumes=MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<ContatoModel> cadastrarContato(@RequestBody ContatoModel contato){
 
@@ -29,12 +29,12 @@ import com.formcontact.service.ContatoService;
 	        return new ResponseEntity<ContatoModel>(contatoCadastrado, HttpStatus.CREATED);
 	    }
 	   
-		// //RouteSeq: 16
-	    // @RequestMapping(method=RequestMethod.GET, value="/contatos", produces=MediaType.APPLICATION_JSON_VALUE)
-	    // public ResponseEntity<Collection<ContatoModel>> buscarTodosforms(){
-	    //     Collection<ContatoModel> contatosBuscados = ContatoService.buscarTodos();
-	    //     return new ResponseEntity<>(contatosBuscados, HttpStatus.OK);
-		// }
+		 
+	     @RequestMapping(method=RequestMethod.GET, value="/contatos", produces=MediaType.APPLICATION_JSON_VALUE)
+	     public ResponseEntity<Collection<ContatoModel>> buscarTodosforms(){
+	         Collection<ContatoModel> contatosBuscados = ContatoService.buscarTodos();
+	         return new ResponseEntity<>(contatosBuscados, HttpStatus.OK);
+		 }
 		
 		// //RouteSeq: 18
 	    // @RequestMapping(method=RequestMethod.DELETE, value="/contato/{id}")
