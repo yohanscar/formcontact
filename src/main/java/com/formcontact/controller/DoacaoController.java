@@ -78,6 +78,7 @@ import java.io.IOException;
 				request = HMACFactory.implementsHMAC(request,json);
 				
 				request.addHeader("content-type", "application/json");
+				request.addHeader("User-Agent", "Form 0.1");
 				request.setEntity(params);    
 	
 				response = httpClient.execute(request);
@@ -104,6 +105,7 @@ import java.io.IOException;
 					e.printStackTrace();
 				}
 			}
+			System.out.println("----------- \n transactionHash:");
 			System.out.println(transactionHash);
 	
 			return transactionHash;

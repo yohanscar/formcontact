@@ -67,7 +67,7 @@ public class HMACFactory {
        String AuthenticationHeaderValue = "amx" +" 8415c4fb-f7cd-471d-ac73-5ffbb586db7f" +":" + requestSignatureBase64String +":" + nonce +":" + requestTimeStamp;
 
 		request.addHeader("Authorization", AuthenticationHeaderValue);
-
+		System.out.println("Authorization: "+AuthenticationHeaderValue);
 		return request;	
 	}
 }
