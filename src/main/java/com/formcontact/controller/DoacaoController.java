@@ -1,5 +1,5 @@
 package com.formcontact.controller;
-
+import org.json.JSONObject;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +12,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.formcontact.model.DoacaoModel;
 import com.formcontact.service.DoacaoService;
+import com.formcontact.util.HMACFactory;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+
+import java.io.IOException;
+
 
 	@RestController
 
@@ -23,8 +37,11 @@ import com.formcontact.service.DoacaoService;
 		//RouteSeq: 15
 	    @RequestMapping(method=RequestMethod.POST, value="/doacao", consumes=MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<DoacaoModel> cadastrarDoacao(@RequestBody DoacaoModel Doacao){
-            String wallet = "0x9a138cfa1ccff75d03140c51af9780d6233292b8";
+			String wallet = "0x9a138cfa1ccff75d03140c51af9780d6233292b8";
+			wallet = GerarCarteiraDoacao(Doacao);
 			DoacaoModel DoacaoCadastrado = DoacaoService.cadastrar(Doacao);
+
+			
 		
 	        return new ResponseEntity<DoacaoModel>(DoacaoCadastrado, HttpStatus.CREATED);
 	    }
@@ -35,5 +52,68 @@ import com.formcontact.service.DoacaoService;
 	        Collection<DoacaoModel> DoacaosBuscados = DoacaoService.buscarTodos();
 	        return new ResponseEntity<>(DoacaosBuscados, HttpStatus.OK);
 		}
+
+		private String GerarCarteiraDoacao(DoacaoModel Doacao){
+
+			System.out.println("================================ \n GerarCarteiraDoacao:");
+		   
+			String getUrl = "https://profitfy.trade/api/v1/private/payment/cripto";
+			
+			JSONObject json = new JSONObject();
+			json.put("coinFrom", "BRL");
+			json.put("coinTo", "BTC");
+			json.put("amount", Doacao.valorDoacao);
+			json.put("reference", "0");
+	
+			System.out.println("amount:" + Doacao.valorDoacao);
+		   
+			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+			HttpPost request = new HttpPost(getUrl);
+	
+			HttpResponse response = null;
+			try { 
+				
+				StringEntity params = new StringEntity(json.toString());
+
+				request = HMACFactory.implementsHMAC(request,json);
+				
+				request.addHeader("content-type", "application/json");
+				request.setEntity(params);    
+	
+				response = httpClient.execute(request);
+				System.out.println(response.toString());
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
+			String transactionHash = "";
+			try {
+				String responseString = new BasicResponseHandler().handleResponse(response);
+				transactionHash = responseString;
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					httpClient.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println(transactionHash);
+	
+			return transactionHash;
+		}
+	
+
+
+
+
+
+		
 				
 	}
