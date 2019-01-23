@@ -16,7 +16,7 @@ import java.net.URI;
 public class HMACFactory {
 
 	public static HttpPost implementsHMAC(HttpPost request, JSONObject json) {
-		String requestContentBase64String;
+		String requestContentBase64String="";;
 		String requestSignatureBase64String="";
 		URI u = request.getURI();
 
