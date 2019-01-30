@@ -65,7 +65,7 @@ import java.io.IOException;
 			json.put("coinTo", "BTC");
 			json.put("amount", Doacao.valorDoacao);
 			json.put("reference", "0");
-			json.put("create", "true");
+			json.put("create", true);
 	
 			System.out.println("amount:" + Doacao.valorDoacao);
 		   
