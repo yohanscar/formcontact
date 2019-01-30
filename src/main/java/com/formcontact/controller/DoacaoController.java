@@ -79,7 +79,7 @@ import java.io.IOException;
 
 				request = HMACFactory.implementsHMAC(request,json);
 				
-				request.addHeader("content-type", "application/json");
+				request.addHeader("Content-Type", "application/json");
 				request.addHeader("accept", "text/json");
 				request.addHeader("User-Agent", "Form 0.1");
 				request.setEntity(params);    
