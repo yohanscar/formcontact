@@ -25,7 +25,7 @@ public class HMACFactory {
 
 		UUID uuid = UUID.randomUUID();
 		String nonce = uuid.toString();
-
+        nonce.replace( "-" , "");
 		String requestTimeStamp = new Long(java.time.Instant.now().getEpochSecond()).toString();
 
 		String content = json.toString();
