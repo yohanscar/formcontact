@@ -25,7 +25,7 @@ public class HMACFactory {
 
 		UUID uuid = UUID.randomUUID();
 		String nonce = uuid.toString();
-        nonce.replace( "-" , "");
+        nonce.replaceAll( "-" , "");
 		String requestTimeStamp = new Long(java.time.Instant.now().getEpochSecond()).toString();
 
 		String content = json.toString();
@@ -44,7 +44,7 @@ public class HMACFactory {
 		
 		requestContentBase64String = Base64.encodeBase64String(md5Content.getBytes());
 
-		String signatureRawData = "8415c4fb-f7cd-471d-ac73-5ffbb586db7f" + "POST" + requestUri + requestTimeStamp +nonce +requestContentBase64String;
+		String signatureRawData = "8415c4fb-f7cd-471d-ac73-5ffbb586db7f" + "GET" + requestUri + requestTimeStamp +nonce +requestContentBase64String;
 		String x = "tSQLNweF9i8UDEg/+/J8IvI+YpM8bPirEC0AhtAqzbE=";
 
 		String secretKeyByteArray = Base64.decodeBase64(x).toString();
