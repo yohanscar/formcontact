@@ -58,7 +58,9 @@ import java.io.IOException;
 			System.out.println("================================ \n GerarCarteiraDoacao:");
 		   
 			//https://bootcamp.profitfy.trade
-			String getUrl = "https://bootcamp.profitfy.trade/api/v1/private/payment/cripto";
+			
+			//String getUrl = "https://bootcamp.profitfy.trade/api/v1/private/payment/cripto";
+			String getUrl = "https://bootcamp.profitfy.trade//api/v1/private/userinfo";
 			
 			JSONObject json = new JSONObject();
 			json.put("coinFrom", "BRL");
@@ -70,7 +72,8 @@ import java.io.IOException;
 			System.out.println("amount:" + Doacao.valorDoacao);
 		   
 			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-			HttpPost request = new HttpPost(getUrl);
+			//HttpPost request = new HttpPost(getUrl);
+			HttpGet request = new HttpGet(getUrl);
 	
 			HttpResponse response = null;
 			try { 
@@ -82,7 +85,7 @@ import java.io.IOException;
 				request.addHeader("Content-Type", "application/json");
 				request.addHeader("accept", "text/json");
 				request.addHeader("User-Agent", "Form 0.1");
-				request.setEntity(params);    
+				//request.setEntity(params);    
 	
 				response = httpClient.execute(request);
 				System.out.println(response.toString());

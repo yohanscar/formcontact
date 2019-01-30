@@ -1,5 +1,6 @@
 package com.formcontact.util;
 
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 
 import java.time.Instant;
@@ -15,7 +16,7 @@ import java.net.URI;
 
 public class HMACFactory {
 
-	public static HttpPost implementsHMAC(HttpPost request, JSONObject json) {
+	public static HttpGet implementsHMAC(HttpGet request, JSONObject json) {
 		String requestContentBase64String="";;
 		String requestSignatureBase64String="";
 		URI u = request.getURI();
