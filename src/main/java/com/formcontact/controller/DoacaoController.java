@@ -60,7 +60,7 @@ import java.io.IOException;
 			//https://bootcamp.profitfy.trade
 			
 			//String getUrl = "https://bootcamp.profitfy.trade/api/v1/private/payment/cripto";
-			String getUrl = "https://bootcamp.profitfy.trade//api/v1/private/userinfo";
+			String getUrl = "https://bootcamp.profitfy.trade//api/v1/private/userinfo/";
 			
 			JSONObject json = new JSONObject();
 			json.put("coinFrom", "BRL");
@@ -82,8 +82,9 @@ import java.io.IOException;
 
 				request = HMACFactory.implementsHMAC(request,json);
 				
-				request.addHeader("Content-Type", "application/json");
-				request.addHeader("accept", "text/json");
+				//request.addHeader("Content-Type", "application/json");
+				//request.addHeader("accept", "text/json");
+				request.addHeader("accept", "application/json");
 				request.addHeader("User-Agent", "Form 0.1");
 				//request.setEntity(params);    
 	
