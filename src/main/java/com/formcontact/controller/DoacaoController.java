@@ -57,7 +57,8 @@ import java.io.IOException;
 
 			System.out.println("================================ \n GerarCarteiraDoacao:");
 		   
-			String getUrl = "https://profitfy.trade/api/v1/private/payment/cripto";
+			//https://bootcamp.profitfy.trade
+			String getUrl = "https://bootcamp.profitfy.trade/api/v1/private/payment/cripto";
 			
 			JSONObject json = new JSONObject();
 			json.put("coinFrom", "BRL");
