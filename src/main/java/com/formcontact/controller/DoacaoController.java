@@ -60,7 +60,7 @@ import java.io.IOException;
 			//https://bootcamp.profitfy.trade
 			
 			//String getUrl = "https://bootcamp.profitfy.trade/api/v1/private/payment/cripto";
-			String getUrl = "https://bootcamp.profitfy.trade//api/v1/private/userinfo/";
+			String getUrl = "https://bootcamp.profitfy.trade/api/v1/private/userinfo/";
 			
 			JSONObject json = new JSONObject();
 			json.put("coinFrom", "BRL");
@@ -80,7 +80,14 @@ import java.io.IOException;
 				
 				StringEntity params = new StringEntity(json.toString());
 
-				request = HMACFactory.implementsHMAC(request,json);
+				//request = HMACFactory.implementsHMAC(request,json);
+
+				String hmac = GerarHMAC(json);
+
+		        request.addHeader("Authorization", hmac);
+				
+				System.out.println("= =  \n hmac:");  
+				System.out.println(hmac);  
 				
 				//request.addHeader("Content-Type", "application/json");
 				//request.addHeader("accept", "text/json");
@@ -117,12 +124,56 @@ import java.io.IOException;
 	
 			return transactionHash;
 		}
+
+		private String GerarHMAC(JSONObject json){
+
+			System.out.println("================================ \n GerarHMAC:");
+		   
+			String getUrl = "https://localhost:5001/api/values/";
+				
+			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+			
+			HttpPost request = new HttpPost(getUrl);
 	
-
-
-
-
-
-		
+			HttpResponse response = null;
+			try { 
+				
+				StringEntity params = new StringEntity(json.toString());
+				
+				request.addHeader("Content-Type", "application/json");
+				//request.addHeader("accept", "text/json");
+				//request.addHeader("accept", "application/json");
+				request.addHeader("User-Agent", "Form 0.1");
+				request.setEntity(params);    
+	
+				response = httpClient.execute(request);
+				System.out.println(response.toString());
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
+			String transactionHash = "";
+			try {
+				String responseString = new BasicResponseHandler().handleResponse(response);
+				transactionHash = responseString;
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					httpClient.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println("----------- \n hmac local response:");
+			System.out.println(transactionHash);
+	
+			return transactionHash;
+		}
 				
 	}
