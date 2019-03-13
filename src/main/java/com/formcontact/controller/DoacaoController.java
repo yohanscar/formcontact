@@ -38,10 +38,9 @@ import java.io.IOException;
 	    @RequestMapping(method=RequestMethod.POST, value="/doacao", consumes=MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<DoacaoModel> cadastrarDoacao(@RequestBody DoacaoModel Doacao){
 			String wallet = "0x9a138cfa1ccff75d03140c51af9780d6233292b8";
-			wallet = GerarCarteiraDoacao(Doacao);
+			//wallet = GerarCarteiraDoacao(Doacao);
+			wallet = GerarDoacaoProfitify(Doacao);
 			DoacaoModel DoacaoCadastrado = DoacaoService.cadastrar(Doacao);
-
-			
 		
 	        return new ResponseEntity<DoacaoModel>(DoacaoCadastrado, HttpStatus.CREATED);
 	    }
@@ -51,6 +50,74 @@ import java.io.IOException;
 	    public ResponseEntity<Collection<DoacaoModel>> buscarTodasDoacoes(){
 	        Collection<DoacaoModel> DoacaosBuscados = DoacaoService.buscarTodos();
 	        return new ResponseEntity<>(DoacaosBuscados, HttpStatus.OK);
+		}
+
+
+		private String GerarDoacaoProfitify(DoacaoModel Doacao){
+
+			System.out.println("================================ \n GerarDoacaoProfitify:");
+
+			String getUrl = "https://localhost:5001/api/doacao";
+
+
+			JSONObject json = new JSONObject();
+
+			//{"idDoacao":0,"nome":"joao","cpf":"123456789","email":"joao@server","valorDoacao":10,"totalBitcoins":50,
+			//"origem":"alice","destino":"bob","apiResponse":"na","dataInclusao":"01012001"}
+
+			json.put("idDoacao", Doacao.idDoacao);
+			json.put("nome", Doacao.nome);
+			json.put("cpf", Doacao.valorDoacao);
+			json.put("email", Doacao.valorDoacao);
+			json.put("valorDoacao", Doacao.valorDoacao);
+			json.put("totalBitcoins", Doacao.totalBitcoins);
+			json.put("origem", Doacao.origem);
+			json.put("destino", Doacao.destino);
+			json.put("apiResponse", Doacao.apiResponse);
+			json.put("dataInclusao", Doacao.dataInclusao);
+
+			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+			HttpPost request = new HttpPost(getUrl);
+			
+			HttpResponse response = null;
+			try { 
+				
+				StringEntity params = new StringEntity(json.toString());
+				
+				request.addHeader("Content-Type", "application/json");
+				//request.addHeader("accept", "text/json");
+				//request.addHeader("accept", "application/json");
+				request.addHeader("User-Agent", "Form 0.1");
+				request.setEntity(params);    
+	
+				response = httpClient.execute(request);
+				System.out.println(response.toString());
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
+			String transactionHash = "";
+			try {
+				String responseString = new BasicResponseHandler().handleResponse(response);
+				transactionHash = responseString;
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					httpClient.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println("----------- \n transactionHash:");
+			System.out.println(transactionHash);
+	
+			return transactionHash;
 		}
 
 		private String GerarCarteiraDoacao(DoacaoModel Doacao){
